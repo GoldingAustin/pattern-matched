@@ -20,14 +20,14 @@ export type Product<
   Pattern,
   Return = unknown,
   MatchPattern extends Extract<Match, OutputPattern<Pattern>> = Extract<Match, OutputPattern<Pattern>>
-> = ((match: MatchPattern) => Return) | Return;
+> = ((matched: MatchPattern) => Return) | Return;
 
-export type ByReturn<Match, Return> = [Match | Partial<Match>, Product<Match, Return>];
+export type WhenReturn<Match, Return> = [Match | Partial<Match>, Product<Match, Return>];
 
-export interface ByProduct<Match, Return> {
-  end: () => Return | undefined;
-  by: <Pattern, PatternReturn = unknown>(
+export interface When<Match, Return> {
+  else: <DefaultValue = undefined>(defaultValue?: DefaultValue) => Return | DefaultValue;
+  when: <Pattern, PatternReturn = unknown>(
     pattern: Pattern,
     product: Product<Match, Pattern, PatternReturn>
-  ) => ByProduct<Match, PatternReturn | Return>;
+  ) => When<Match, PatternReturn | Return>;
 }

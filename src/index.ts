@@ -1,5 +1,5 @@
 import { patternMatching } from './pattern-matching';
-import type { ByProduct, ByReturn } from './types';
+import type { When, WhenReturn } from './types';
 
 /**
  * Helper function to produce chained pattern matching functions.
@@ -8,17 +8,18 @@ import type { ByProduct, ByReturn } from './types';
  */
 const patternMatcher = <Match = unknown, Return = undefined>(
   condition: Match,
-  patterns: Array<ByReturn<Match, Return>> = []
-): ByProduct<Match, Return> => {
+  patterns: Array<WhenReturn<Match, Return>> = []
+): When<Match, Return> => {
   return {
-    end: (): Return | undefined => {
+    else: (defaultValue) => {
       for (const [patternMatch, callback] of patterns) {
         if (patternMatching(condition, patternMatch))
           return callback instanceof Function ? callback(condition) : callback;
       }
-      return undefined;
+      return defaultValue;
     },
-    by: (pattern, product) => patternMatcher(condition, [...patterns, [pattern, product] as ByReturn<Match, Return>]),
+    when: (pattern, product) =>
+      patternMatcher(condition, [...patterns, [pattern, product] as WhenReturn<Match, Return>]),
   };
 };
 
@@ -27,5 +28,5 @@ const patternMatcher = <Match = unknown, Return = undefined>(
  * @param {Match} condition a condition to match against a pattern. Can any primitive, array or object.
  */
 export const match = <Match>(condition: Match) => {
-  return patternMatcher<Match>(condition, []);
+  return patternMatcher<Match>(condition);
 };
