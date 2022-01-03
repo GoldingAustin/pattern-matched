@@ -1,0 +1,46 @@
+{
+  "name": "pattern-match",
+  "version": "0.1.0",
+  "license": "MIT",
+  "description": "A pattern matching library for Typescript & JavaScript",
+  "author": {
+    "name": "Austin Golding",
+    "email": "austinjgolding@icloud.com"
+  },
+  "source": "src/index.ts",
+  "module": "dist/index.modern.module.js",
+  "unpkg": "dist/index.umd.js",
+  "types": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "microbundle watch",
+    "build": "microbundle",
+    "test": "jest --config=jest.json",
+    "lint": "eslint src",
+    "format": "prettier --write 'src/**/*.ts'"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.4.0",
+    "@typescript-eslint/eslint-plugin": "^5.8.1",
+    "@typescript-eslint/parser": "^5.8.1",
+    "eslint": "^8.6.0",
+    "jest": "^27.4.5",
+    "microbundle": "^0.14.2",
+    "prettier": "^2.5.1",
+    "ts-jest": "^27.1.2",
+    "typescript": "^4.5.4"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "singleQuote": true,
+    "printWidth": 120,
+    "tabWidth": 2,
+    "semi": true,
+    "endOfLine": "lf"
+  },
+  "packageManager": "yarn@3.1.1"
+}
