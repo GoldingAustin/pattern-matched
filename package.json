@@ -1,11 +1,20 @@
 {
-  "name": "pattern-match",
-  "version": "0.1.0",
+  "name": "pattern-matched",
+  "version": "0.2.0",
   "license": "MIT",
   "description": "A pattern matching library for Typescript & JavaScript",
   "author": {
     "name": "Austin Golding",
-    "email": "austinjgolding@icloud.com"
+    "email": "austin.golding.dev@icloud.com"
+  },
+  "keywords": [
+    "pattern",
+    "matching",
+    "pattern matching"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GoldingAustin/pattern-matched"
   },
   "source": "src/index.ts",
   "module": "dist/index.modern.module.js",
