@@ -1,17 +1,17 @@
 import { match } from '../index';
 
 type Update =
-  | { score: number; team?: string }
-  | { result: 'win' | 'lose'; team: string }
-  | { quarter: number; test?: 'hello' };
+  | { type: 'score'; score: number; team?: string }
+  | { type: 'result'; result: 'win' | 'lose'; team: string }
+  | { type: 'quarter'; quarter: number };
 
 const gameUpdate = (condition: Update) =>
   match(condition)
-    .when({ score: 5 }, (message) => {
+    .when({ type: 'score' }, (message) => {
       console.log(`new score ${message.score} for ${message.team}`);
       return { score: message.score, team: message.team };
     })
-    .when({ result: 'win' }, (message) => {
+    .when({ type: 'result' }, (message) => {
       console.log(`${message.team} won`);
       return `${message.team} won`;
     })
@@ -21,17 +21,17 @@ const gameUpdate = (condition: Update) =>
     })
     .else();
 
-describe('match object', () => {
+describe('match event types', () => {
   it('match object union', () => {
-    expect(gameUpdate({ score: 5 })).toEqual({ score: 5, team: undefined });
-    expect(gameUpdate({ result: 'win', team: 'Red' })).toEqual('Red won');
+    expect(gameUpdate({ type: 'score', score: 5 })).toEqual({ score: 5, team: undefined });
+    expect(gameUpdate({ type: 'result', result: 'win', team: 'Red' })).toEqual('Red won');
   });
 
   it('fallback case when condition has no when handler', () => {
-    expect(gameUpdate({ result: 'lose', team: 'Blue' })).toEqual(undefined);
+    expect(gameUpdate({ type: 'result', result: 'lose', team: 'Blue' })).toEqual('Blue won');
   });
 
   it('match quarter type', () => {
-    expect(gameUpdate({ quarter: 2 })).toEqual(3);
+    expect(gameUpdate({ type: 'quarter', quarter: 2 })).toEqual(3);
   });
 });
