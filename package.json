@@ -1,12 +1,13 @@
 {
   "name": "pattern-matched",
-  "version": "0.3.0",
+  "version": "0.3.2",
   "license": "MIT",
   "description": "A pattern matching library for Typescript & JavaScript",
   "author": {
     "name": "Austin Golding",
     "email": "austin.golding.dev@icloud.com"
   },
+  "sideEffects": false,
   "keywords": [
     "pattern",
     "matching",

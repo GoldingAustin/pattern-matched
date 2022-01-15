@@ -36,9 +36,9 @@ export type Product<
 export type WhenReturn<Match, Return> = [Partial<Match>, Product<Match, Return>];
 
 export interface When<Match, Return> {
-  else: <DefaultValue = undefined>(defaultValue?: DefaultValue) => Return | DefaultValue;
+  else: <DefaultValue = undefined>(defaultValue?: DefaultValue) => DefaultValue | Return;
   when: <Pattern extends InputOutputPattern<Match> | object, PatternReturn = unknown>(
     pattern: Pattern,
     product: Product<Match, Pattern, PatternReturn>
-  ) => When<Match, Return>;
+  ) => When<Match, PatternReturn | Return>;
 }
